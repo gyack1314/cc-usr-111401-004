@@ -37,3 +37,29 @@ def inspect(data,store,root):
     create_archive(store,digests,dict(baseline,table_heads=selected),path)
     index,objects=read_archive(path)
     return {'backup_id':index['backup_id'],'base_commit':index['base_commit'],'objects':len(objects),'table_heads':index['table_heads']}
+
+
+def __getattr__(name):
+    """按需暴露链恢复接口，避免扩展单包读取时的循环导入。"""
+    if name in _RESTORE_EXPORTS:
+        import importlib
+        _restore = importlib.import_module(__package__ + '.restore')
+        return getattr(_restore, name)
+    raise AttributeError(name)
+
+
+_RESTORE_EXPORTS = {
+    'RestoreError', 'RestoreRun', 'RestoredWarehouse', 'Restorer',
+    'ChainError', 'RecoveryError',
+    'plan_restore', 'restore', 'restore_chain', 'restore_to',
+    'restore_target', 'restore_chain_to', 'recover', 'resume',
+    'open_restored', 'open_repository', 'open_warehouse',
+    'verify_restored', 'verify_repository', 'verify_restore',
+    'stage_status', 'completed_stages', 'resume_status', 'previous_stages',
+    'restore_status', 'resume_status_for',
+    'read_chain', 'read_baseline', 'inspect_closure', 'diagnose_restore',
+    'check_restore', 'check_chain',
+    'build_source', 'restore_document', 'plan_document', 'plan_from_document',
+    'read_inputs', 'restore_from_files', 'plan_from_files', 'Source',
+    'Restorer', 'save_plan', 'load_plan', 'query_restored',
+}
