@@ -1,0 +1,89 @@
+{
+  "baseline": {
+    "backup_id": "full-a",
+    "base_commit": "c0",
+    "table_heads": {
+      "usage": "u0",
+      "teams": "t0"
+    }
+  },
+  "increments": [
+    {
+      "sequence": 1,
+      "commit_id": "c1",
+      "changes": {
+        "usage": "u1",
+        "teams": "t1"
+      }
+    },
+    {
+      "sequence": 2,
+      "commit_id": "c2",
+      "changes": {
+        "usage": "u2"
+      }
+    }
+  ],
+  "targets": [
+    "c0",
+    "c1",
+    "c2"
+  ],
+  "tables": {
+    "u0": {
+      "schema": {
+        "value": "int"
+      },
+      "rows": [
+        {
+          "row_id": "a",
+          "value": 1
+        }
+      ]
+    },
+    "t0": {
+      "schema": {
+        "value": "int"
+      },
+      "rows": [
+        {
+          "row_id": "a",
+          "value": 10
+        }
+      ]
+    },
+    "u1": {
+      "schema": {
+        "value": "int"
+      },
+      "rows": [
+        {
+          "row_id": "a",
+          "value": 2
+        }
+      ]
+    },
+    "t1": {
+      "schema": {
+        "value": "int"
+      },
+      "rows": [
+        {
+          "row_id": "a",
+          "value": 11
+        }
+      ]
+    },
+    "u2": {
+      "schema": {
+        "value": "int"
+      },
+      "rows": [
+        {
+          "row_id": "a",
+          "value": 3
+        }
+      ]
+    }
+  }
+}
